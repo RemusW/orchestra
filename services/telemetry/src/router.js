@@ -45,6 +45,10 @@ router.get('/api/raw-mission', timeout, async (ctx) => {
   ctx.proto = await ctx.plane.getRawMission();
 });
 
+router.get('/autopilot-mode', async (ctx) => {
+  ctx.proto = ctx.plane.getAutopilotMode();
+})
+
 router.post('/api/raw-mission', mission, timeout, async (ctx) => {
   await ctx.plane.setRawMission(ctx.request.proto);
   ctx.status = 200;

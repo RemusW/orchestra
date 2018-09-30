@@ -39,7 +39,8 @@ export default class Plane {
       alt: {},
       vel: {},
       speed: {},
-      battery: {}
+      battery: {},
+      mode: 0
     });
     // Will be assigned on each GLOBAL_POSITION_INT message.
     this._interopTelem = null;
@@ -219,7 +220,8 @@ export default class Plane {
       .on('MISSION_CURRENT', this._onMissionCurrent.bind(this))
       .on('MISSION_ITEM', this._onMissionItem.bind(this))
       .on('VFR_HUD', this._onVfrHud.bind(this))
-      .on('SYS_STATUS', this._onSysStatus.bind(this));
+      .on('SYS_STATUS', this._onSysStatus.bind(this))
+      .on('HEARTBEAT', this._onHeartbeat.bind(this));
   }
 
   async _onAttitude(fields) {
@@ -299,5 +301,11 @@ export default class Plane {
     ov.battery.voltage = fields.voltage_battery / 1000;
     ov.battery.current = fields.current_battery / 100;
     ov.battery.percentage = fields.battery_remaining;
+  }
+
+  async _onHeartbeat(fields) {
+    let ov = this._overview;
+
+    ov.mode = fields.base_mode;
   }
 }

@@ -24,6 +24,7 @@ message Overview {
     Velocity vel = 5;
     Speed speed = 6;
     Battery battery = 7;
+    uint32 mode = 8;
 }
 
 // WGS84 in degrees
