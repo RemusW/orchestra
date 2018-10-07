@@ -19,6 +19,13 @@ message PingTimes {
         uint32 ms = 5;
     }
 
+    message DevicePing {
+        string name = 1;
+        string host = 2;
+        bool online = 3;
+        uint32 ms = 4;
+    }
+
     double time = 1;
     repeated ServicePing list = 2;
 }
